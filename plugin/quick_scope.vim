@@ -69,7 +69,7 @@ if !exists('g:qs_highlight_on_keys')
     else
       autocmd CursorMoved,InsertLeave,ColorScheme,WinEnter,BufEnter * call quick_scope#HighlightLineDelay(2, g:qs_accepted_chars)
     endif
-    autocmd InsertEnter,BufLeave,TabLeave,WinLeave * call quick_scope#UnhighlightLine()
+    autocmd InsertEnter,BufLeave,TabLeave,WinLeave * call quick_scope#StopTimer() | call quick_scope#UnhighlightLine()
   augroup END
 else
   " Highlight on key press. Set an 'augmented' mapping for each defined key.

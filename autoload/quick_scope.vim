@@ -39,7 +39,7 @@ function! quick_scope#HighlightLineDelayCallback(direction, targets, _id) abort
   call quick_scope#HighlightLine(a:direction, a:targets)
 endfunction
 
-let s:timer = 0
+let s:timer = -1
 
 function! quick_scope#HighlightLineDelay(direction, targets) abort
   if g:qs_enable && g:qs_delay > 0
@@ -49,6 +49,12 @@ function! quick_scope#HighlightLineDelay(direction, targets) abort
   else
     call quick_scope#UnhighlightLine()
     call quick_scope#HighlightLine(a:direction, a:targets)
+  endif
+endfunction
+
+function! quick_scope#StopTimer() abort
+  if g:qs_delay > 0
+    call timer_stop(s:timer)
   endif
 endfunction
 
